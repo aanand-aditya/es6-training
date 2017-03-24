@@ -1,0 +1,15 @@
+queries:
+
+//to keep inserting in case of exception
+db.sports.insertMany([{name:"aaa"},{name:"abc"},{name:"pqr"}],{ordered:false})
+
+//to change the particular element in an array of document with another element
+db.employee.update({random:{$in:[9]}},{$set:{"random.$:"abc"}})
+
+//to get the updated result after modification
+db.sports.findAndModify({query:{name:"sss"},update:{$set:{name:"hhh"}},new:true})
+
+//to increase the content of an object property inside an array
+//{ "_id" : ObjectId("58d53444de562a36793cf546"), "name" : "han", "age" : 20, "random" : [ 1, 2, 3, { "a" : 3, "b" : 5 } ] }
+db.sports.update({_id:ObjectId("58d53444de562a36793cf546")},{$inc:{"random.3.a":2}})
+
